@@ -58,3 +58,116 @@ recommend_meal_type(Dish, MealType) :-
 % 6. Recommend a drink that pairs well with a selected dish
 recommend_drink(Dish, Drink) :-
     drink_pair(Dish, Drink).
+
+
+
+# Explanetiom
+# The Prolog program fully meets all the specified criteria:
+
+# Recommends dishes without pepper.
+# Recommends the dish with the lowest price.
+# Recommends culturally significant dishes.
+# Recommends dishes that are high in protein.
+# Recommends dishes suitable for lunch or breakfast.
+# Recommends drinks that pair well with a selected dish.
+
+# 1. Recommends dishes without pepper.
+recommend_no_pepper(Dish) :-
+    dish(Dish, no, _, _, _, _).
+
+# Output:
+# 2 ?- recommend_no_pepper(Dish).
+# Dish = tibs ;
+# Dish = ater_kik ;
+# Dish = chechebsa ;
+# Dish = genfo ;
+# Dish = shiro ;
+# Dish = beyaynetu ;
+# Dish = injera ;
+# Dish = kinche ;
+# Dish = dabo_kolo ;
+# Dish = tilapia_fish ;
+# Dish = pasta ;
+# Dish = salad ;
+# Dish = steak ;
+# Dish = omelette ;
+# Dish = falafel.
+
+# 2. Recommends the dish with the lowest price.
+recommend_lowest_price(Dish) :-
+    findall(Price-Dish, dish(Dish, _, Price, _, _, _), Dishes),
+    sort(Dishes, [(_-Dish)|_]).
+
+# Output:
+# 2 ?- recommend_lowest_price(Dish).
+# Dish = dabo_kolo.
+
+# 3. Recommends culturally significant dishes.
+recommend_cultural_dish(Dish) :-
+    dish(Dish, _, _, _, _, yes).
+
+# Output:
+# 2 ?- recommend_cultural_dish(Dish).
+# Dish = doro_wot ;
+# Dish = tibs ;
+# Dish = kitfo ;
+# Dish = ater_kik ;
+# Dish = chechebsa ;
+# Dish = genfo ;
+# Dish = shiro ;
+# Dish = beyaynetu ;
+# Dish = injera ;
+# Dish = kinche ;
+# Dish = dabo_kolo ;
+# Dish = tilapia_fish ;
+# Dish = steak ;
+# Dish = fish_tacos ;
+# Dish = falafel.
+
+# 4. Recommends dishes that are high in protein.
+recommend_high_protein(Dish) :-
+    dish(Dish, _, _, high, _, _).
+
+# Output:
+# 2 ?- recommend_high_protein(Dish).
+# Dish = doro_wot ;
+# Dish = tibs ;
+# Dish = kitfo ;
+# Dish = pasta ;
+# Dish = steak ;
+# Dish = falafel.
+
+# 5. Recommends dishes suitable for lunch or breakfast.
+recommend_meal_type(Dish, MealType) :-
+    dish(Dish, _, _, _, MealType, _).
+
+# Output for lunch:
+# 2 ?- recommend_meal_type(Dish, lunch).
+# Dish = doro_wot ;
+# Dish = tibs ;
+# Dish = kitfo ;
+# Dish = ater_kik ;
+# Dish = shiro ;
+# Dish = beyaynetu ;
+# Dish = tilapia_fish ;
+# Dish = pasta ;
+# Dish = burger ;
+# Dish = salad ;
+# Dish = fish_tacos ;
+# Dish = falafel.
+
+# Output for breakfast:
+# 2 ?- recommend_meal_type(Dish, breakfast).
+# Dish = chechebsa ;
+# Dish = genfo ;
+# Dish = injera ;
+# Dish = kinche ;
+# Dish = omelette.
+
+# 6. Recommends drinks that pair well with a selected dish.
+recommend_drink(Dish, Drink) :-
+    drink_pair(Dish, Drink).
+
+# Output:
+# 2 ?- recommend_drink(doro_wot, Drink).
+# Drink = tej.
